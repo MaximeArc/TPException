@@ -1,0 +1,6 @@
+import java.io.IOException;
+
+public class BadDataException extends IOException{
+    public BadDataException(String s) {super(s);}
+
+}

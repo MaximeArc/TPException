@@ -1,0 +1,78 @@
+Exercice1
+
+PS C:\Users\maxim\IdeaProjects\Exceptions\src> java TraceException 10 2                          
+Debut du main
+Debut de m2
+Dans m2 avant appel de m1
+Debut de m1
+Fin de m1
+Dans m2 apres appel de m1
+Fin de m2
+x = 5.0
+Fin du main
+
+---> Le premier argument 10 est passé à x 
+---> Le second argument 2 est passé à m2 puis m1
+---> 2 est différent de 0 et 10 * 2 est superieur à 0, les exceptions de la methode m1 sont donc passées
+---> Le resultat x est affiché en sortie
+
+PS C:\Users\maxim\IdeaProjects\Exceptions\src> java TraceException 10 -2
+Debut du main
+Debut de m2
+Dans m2 avant appel de m1
+Debut de m1
+parametre de signe oppose a l'attribut
+Fin de m2
+x = 10.0
+Fin du main
+
+---> Le premier argument 10 est passé à x 
+---> Le second argument -2 est passé à m2 puis m1
+---> -2 est différent de 0 et 10 * -2 est inférieur à 0, l'exception E2 est donc déclenchée
+---> Cette exception étant présente dans le catch de m2, le programme affiche le message et se termine sans erreur
+
+PS C:\Users\maxim\IdeaProjects\Exceptions\src> java TraceException 10 0
+Debut du main
+Debut du main
+Debut de m2
+Dans m2 avant appel de m1
+Debut de m1
+Exception in thread "main" E1: parametre de m1 null
+        at TraceException.main(TraceException.java:37)
+		
+---> Le premier argument 10 est passé à x 
+---> Le second argument 0 est passé à m2 puis m1
+---> 0 est égal 0, l'exception E1 est donc déclenchée
+---> Cette exception n'étant présente aucun catch, le programme affiche le message et se ferme sans se terminer
+
+**************************************************************************
+
+Exercice2
+
+PS C:\Users\maxim\IdeaProjects\Exceptions\src> java Except1            
+main : debut
+main : appel de methodeA
+  methodeA : debut
+  methodeA : appel de methodeB
+    methodeB : debut
+    methodeB : tente d'acceder a args[99]
+    methodeB : capture : java.lang.ArrayIndexOutOfBoundsException: 99
+    methodeB : execute finally
+    methodeB : fin
+  methodeA : retour de methodeB
+  methodeA : execute finally
+  methodeA : fin
+main : retour de methodeA
+main : fin
+
+---> On ne passe aucun argument à la méthode main
+---> La méthode main appelle méthodeA avec String array vide en argument
+---> La méthodeA appelle la méthodeB
+---> La méthodeB tente d'acceder à l'élément présent à l'index 99 du String array
+---> Le String array étant vide, cela déclenche un exception ArrayIndexOutOfBoundsException
+---> Cette exception est capturée dans le catch évitant au programme de se quitter et produit un message d'explication
+---> Le finally de méthodeB produit un message qu'il y ait eu exception ou pas
+---> Le finally de méthodeA produit un message qu'il y ait eu exception ou pas
+---> Le programme s'éxecute jusqu'au bout
+
+***************************************************************************
